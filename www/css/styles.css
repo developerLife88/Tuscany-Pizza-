@@ -1,0 +1,115 @@
+/*
+   statusbar-overlay sets the background color for the overlay. Black text is the default when the statusbar plugin is not added. When the
+   statusbar plugin is added, it also adds default setting to make the content white via:
+
+       <preference name="StatusBarStyle" value="lightcontent"/>
+
+   Setting the background color to black will allow the default light content (white text/icons) to show on it. The statusbar plugin is included
+   in the config.xml file and will be added by the CLI when you build locally.
+
+   See https://github.com/apache/cordova-plugin-statusbar
+*/
+
+.body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.statusbar-overlay {
+    background: #000000;
+
+}
+
+.button-red{
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #f13b63 , #f55615); /* Standard syntax (must be last) */
+    color: white;
+    border-radius: 2px;
+}
+
+
+.button-green{
+    background: #78ba11;
+    color: white;
+    text-shadow: 0 0 0.5px gray;
+}
+
+
+.button-orange{
+    background: orange;
+    color: white;
+}
+
+
+.button-blue{
+    background: #3399ff;
+    color: white;
+}
+
+.button {
+    border: 0px solid transparent;
+}
+
+
+.newColor {
+  color:white !important;    
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #f13b63 , #f55615); /* Standard syntax (must be last) */
+}
+
+.newColor2 {
+  color:white;
+  border: 2px solid white;
+  border-radius: 7px;    
+}
+
+.content-block {
+  padding: 0px !important; 
+}
+
+.panel {
+    background: #292627 !important;
+}
+
+.text-center{
+    text-align: center !important;
+}
+
+
+ .tabbar-labels a.tab-link {
+     padding-top: 0px !important;
+     padding-bottom: 7px !important;
+}
+
+.row .col-50 {
+    margin-top: 15px !important;
+}
+
+.buttons-row .button{
+    border-color: #fff;
+    border: 2px solid white;
+    height: 90px;
+}
+
+.button, .button-big{
+    margin: auto;
+    border-radius: 21px;
+}
+
+
+
+ .popup-overlay {
+    visibility: hidden !important;
+     
+}
+
+
+
+.popup {
+  height: 147% !important;
+  background: #1b1c1e !important;
+}
+
+#order25, #order50, #order25{
+    text-shadow: 0 0 1px gray;
+    font-size: 15px;
+}

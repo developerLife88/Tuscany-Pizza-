@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+  <!-------------------------------------------------    
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+<!------------------------------------------------->  
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>Order Pizza</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    
+    
+    <!----------- firebase links ------------------>    
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    
+    
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    
+ <!------------------------------------------------>     
+</head>
+
+    <style>
+    .brightness {-webkit-filter: brightness(0.50);filter: brightness(0.50);}
+        .navbar-through .page-content {
+     padding-top:0px !important; 
+}
+    </style>
+<body style="font-family: 'Nunito', sans-serif;">
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+  
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar" style=" background-image: linear-gradient(to right, #f13b63 , #f55615);font-family: 'Nunito', sans-serif;
+    color:white; font-size: 27px;">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Tuscany Pizza</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content" style="background-image: linear-gradient(to right, #f13b63 , #f55615);font-family: 'Nunito', sans-serif;">
+                        <div class="content-block">
+        <!----------------------------------------->
+                            
+
+  <div class="card-content"><img class="brightness" src="order.png" width="100%" style="border-radius: 57px;"></div>
+ <br>
+<button  class="button button-big newColor2" id="enjoyBtn"> Start Exploring The Pizza We Make</button>                             
+<ul style="color:white;">
+<li>Order from your phone seamlessly</li>
+<li>Skip to the front of the lineto pick up your order</li>
+<li>Enjoy your food while others continue to wait!</li>                         
+</ul>                            
+
+    
+
+          
+        <!----------------------------------------->
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       
+    <!--------------------------signin popup----------------------->
+<div class="popup popup-about m5" style="background: #292627;">
+    <div class="content-block"> 
+    <h1 class="text-center">Welcome to Tuscany Pizza </h1> 
+     <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+ <h3 class="text-center">Log-in and Enjoy  The Service</h3>
+<div id="firebaseui-auth-container"></div>
+<div id="loader">Loading...</div>  
+       
+    </div>
+  </div>
+<!------------------end of popup------------------------------------>
+          
+    
+     <!-----------firebase js -------------->
+     <script src="js/firebaseAuth.js"></script>    
+    <script src="js/login.js"></script> 
+    
+
+    <!---------------------------------------->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js">
+    </script>
+   <script type="text/javascript" src="js/my-app.js"></script>
+    
+    
+    <script>
+      $('#enjoyBtn').on('click', function(){
+      myApp.popup('.m5');
+     
+          });
+        
+        
+    </script>
+</body>
+
+</html>

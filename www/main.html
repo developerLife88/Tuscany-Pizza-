@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+  <!-------------------------------------------------    
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+<!------------------------------------------------->   
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>Tuscany Pizza</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="css/framework7-icons-master/css/framework7-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    
+    
+    <!----------- firebase links ------------------>    
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+
+ <!------------------------------------------------>     
+</head>
+<style>
+    
+    .button-big{
+        width:100% !important;
+    }    
+    
+    .img-position{
+     background-position: center center;
+     background-repeat: no-repeat;
+     background-size: cover;  
+     height: 200px;
+     color:white;
+     font-size: 27px;
+     text-shadow: 0 0 5px black;
+     font-weight: bold;
+     font-family: 'Nunito', sans-serif;
+    }
+    .brightness {-webkit-filter: brightness(0.80);filter: brightness(0.80);}
+    #paypal-button{margin: auto !important;}
+</style>
+<body class="layout-dark theme-white" style="font-family: 'Nunito', sans-serif;">
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+          
+    <!------------------------------------------------>
+
+  <h1 class="text-center">User Account</h1>
+            <div style="text-align: center;">
+            <img  src="img/user.png" style="width:100px; height:100px; display: inline-block; text-align: center; border-radius: 50%;"><br><br>
+              <div class="item-title text-center">Username</div>
+            <div class="item-subtitle text-center" >Email</div>
+            </div>
+           
+            
+            
+            
+   <br><br>
+    <a href="#" class="button button-big newColor" id="logout">Log-out</a>
+
+   <br><br>
+    <a href="#" class="button button-big newColor" id="updateBtn" data-popup=".m1" class="open-popup">Update name &amp; Email</a>
+                      
+ <br><br>
+                            
+    <a href="#" class="button button-big newColor"  id="updatePwBtn" data-popup=".m2" class="open-popup">Reset Password</a>
+   <br><br>
+            
+    <a href="#" class="button button-big newColor" id="deleteBtn"  data-popup=".m3" class="open-popup">Delete Account</a>
+
+    <!--------------------------------------------->
+        </div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Tuscany Pizza v1.0.1</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <a href="#" class="link icon-only open-panel"><i class="f7-icons">person</i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="content-block">
+        <!----------------------------------------->
+                                   
+       
+         <!-- Tabs, tabs wrapper -->
+  <div class="tabs">
+    <!------------ Tab 1, active by default ---------->
+    <div id="tab1" class="tab active">
+      <div class="content-block">
+        
+        <h2 class="text-center">Choose Pizza &amp; Add To Basket </h2>
+        <!------->
+          <div class="row">
+    <!-- Each "cell" has col-[widht in percents] class -->
+    <div class="col-50 text-center pizza p1"><div class="img-position brightness" style="background-image:url(img/rectangle.png);" valign="bottom" class="card-header color-white no-border">Sicilian </div></div>
+   
+ <div class="col-50 text-center pizza p2"><div class="img-position brightness" style="background-image:url(img/pizzatypes-margherita-.jpg);" valign="bottom" class="card-header color-white no-border">Margherita</div></div>
+              
+          </div>
+          
+            <div class="row">
+    <!-- Each "cell" has col-[widht in percents] class -->
+    <div class="col-50 text-center pizza p3"><div class="img-position brightness" style="background-image:url(img/onions.png);" valign="bottom" class="card-header color-white no-border">Greek </div></div>
+                
+   <div class="col-50 text-center pizza p4"><div class="img-position brightness" style="background-image:url(img/pizzatypes-gourmet.jpg);" valign="bottom" class="card-header color-white no-border">California</div></div>
+                
+          </div>
+            <div class="row">
+    <!-- Each "cell" has col-[widht in percents] class -->
+ <div class="col-50 text-center pizza p5"><div class="img-position brightness" style="background-image:url(img/blog-types-pizza_in-blog-8.jpg);" valign="bottom" class="card-header color-white no-border">St. Louis</div></div>
+                
+   <div class="col-50 text-center pizza p6"><div class="img-position brightness" style="background-image:url(img/flat.png);" valign="bottom" class="card-header color-white no-border">New York </div></div>
+                
+          </div>
+            <div class="row">
+    <!-- Each "cell" has col-[widht in percents] class -->
+ <div class="col-50 text-center pizza p7"><div class="img-position brightness" style="background-image:url(img/bbq-pizza-318-1547837614.jpg);" valign="bottom" class="card-header color-white no-border">BBQ Chicken</div></div>
+                
+ <div class="col-50 text-center pizza p8"><div class="img-position brightness" style="background-image:url(img/pizzatypes-deepdish.png);" valign="bottom" class="card-header color-white no-border">Chicago</div></div>
+          </div>
+        <!------->  
+      </div>
+    </div>
+      
+      
+      
+      
+    
+      
+      
+    <!---------------- Tab 2 ------------------------->
+    <div id="tab2" class="tab">
+      <div class="content-block">
+    <button id="cleanBasket" class="button button-big newColor">Clean Basket &amp; Start Again</button>
+        <br>
+    <h2 class="text-center">Your Basket</h2>
+    <h3 class="text-center">Total is: $<span id="totalPrice" style="font-size: 21px;"></span></h3>      
+   <!--------------------------------------> 
+       <div id="SAMLL"></div> 
+       <div id="MEDIUM"></div> 
+       <div id="LARGE"></div>   
+<div class="list-block store-data">
+  <ul>
+      
+       <!-- Textarea -->
+    <li class="align-top">
+      <div class="item-content">
+        <div class="item-media">  <i class="f7-icons">bag</i></div>
+        <div class="item-inner">
+          <div class="item-title label">Your Order: </div>
+          <div class="item-input">
+            <textarea id="orderDetails"></textarea>
+              <script>
+function disableInteration() {
+  document.getElementById("orderDetails").disabled = true;
+}
+                  disableInteration();
+</script>
+          </div>
+        </div>
+      </div>
+    </li>  
+      
+    <!-- Text inputs -->
+    <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon f7-icons">person</i></div>
+        <div class="item-inner">
+          <div class="item-title label">Name</div>
+          <div class="item-input">
+            <input type="text" id="cName" placeholder="Your name" required>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon f7-icons">email</i></div>
+        <div class="item-inner">
+          <div class="item-title label">E-mail</div>
+          <div class="item-input">
+            <input type="email" id="cEmail" placeholder="E-mail" required>
+          </div>
+        </div>
+      </div>
+    </li>
+      <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon f7-icons">phone</i></div>
+        <div class="item-inner">
+          <div class="item-title label">Phone</div>
+          <div class="item-input">
+            <input type="number" id="cPhone" placeholder="Phone Number" required>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+      <br>
+<div class="row text-center">
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<h5 id="paypalMSG" style="margin: auto;">The safer, easier way to pay</h5><br><br>
+<!--
+    <button id="placeORDER" class="button button-big newColor">Place Order</button>
+    
+-->
+     <div id="paypal-button" ></div>
+    
+   
+  </div>
+                     
+          </div>
+          
+         
+   <!-------------------------------------->      
+      </div>
+    </div>
+      
+      
+      
+     
+      
+  
+      
+      
+     
+      
+      
+      
+      
+      
+      
+          
+     <!-------------------------- pizza Details----------------------->
+<div class="popup popup-about m7" style="background: #292627;">
+    <div class="content-block"> 
+    <div class="card facebook-card">
+  <div class="card-content"><br><br>
+ <button href="#" class="close-popup button button-big button-red">X</button>      
+<!--      <img id="p-img" src="..." width="100%" heigh="50%">-->
+      <h1 id="p-name" class="text-center">Pizz Name</h1>  
+    <p class="text-center" id="p-details"></p> 
+      
+      
+      
+ <!------------------------------>     
+<form id="f7" class="list-block store-data">   
+ <div class="row">
+  <div class="col-50">
+    <input type="number" id="amount" placeholder="Amount" style="border:1px solid gray; border-radius:5px;" required>
+  </div>
+  <div class="col-50">
+    <select id="size" style="border:1px solid gray; border-radius:5px;" required>   
+    <option value="10" >Size: Small - $10</option>
+    <option value="15">Medium - $15</option> 
+    <option value="20">Large - $20</option>    
+  </select>
+  </div>
+ </div> 
+    <br><br>
+    <div class="row">
+    <button type="submit" class=" button button-big newColor close-popup">Add To Basket </button>
+ </div> 
+</form> 
+ <!------------------------------>         
+  </div>
+   </div>     
+            
+    </div>
+  </div>
+<!------------------end of popup------------------------------------>
+    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <!----------------- Tab 3 ----------------------->
+    <div id="tab3" class="tab">
+      <div class="content-block">
+    <h2 class="text-center">Status of Your Order</h2>
+   <!----------------------------------------->
+       <br><br>
+      <div class="demo-progressbar-inline">
+        <p class="buttons-row">
+           <a href="#" data-progress="10" class="button" id="order25">Order <br>Been Sent <br>25%</a>
+          <a href="#" data-progress="30" class="button" id="order50">Taken By<br> Waitress<br> 50%</a>
+          <a href="#" data-progress="50" class="button" id="order100">Ready for <br>Pickup<br> 100%</a>
+        </p>
+      </div> 
+          <br>
+         <ul class="text-center">
+           <li>Skip to the front of the line to pick up your order</li> 
+           <li>Enjoy your food while others continue to wait!</li> <br>
+           <li> <b> If you have any concern about your order then please call us at 555-555-555</b> </li> 
+          </ul>
+   <!----------------------------------------->      
+      </div>
+    </div>
+  </div>
+
+               
+        <!----------------------------------------->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Bottom Toolbar--------------------------------------------->  
+          <div class="toolbar tabbar tabbar-labels">
+    <div class="toolbar-inner">
+        <a href="#tab1" class="tab-link active close-popup">
+            <i class="f7-icons">list</i>
+            <span class="tabbar-label">Manu</span>
+        </a>
+        <a href="#tab2" class="tab-link close-popup">
+           <i class="f7-icons">bag</i>
+            <span class="tabbar-label">Your Basket <span id="basketOrder" class="badge bg-red">0</span></span>
+        </a>
+        <a href="#tab3" class="tab-link close-popup">
+             <i class="f7-icons">compose</i>
+            <span class="tabbar-label">Order Status </span>
+        </a>
+    </div>
+</div>
+<!------------------------------------------------------->            
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-------------------------- update user displayname and email----------------------->
+<div class="popup popup-about m1">
+    <div class="content-block"> 
+    <h1 style="text-align: center;">Updating Displayname &amp; Email</h1>    
+        <form id="f1" class="list-block store-data">
+  <ul>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="text" id="newName" placeholder="Enter a new displayname" >
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="email"  id="currentEmail" placeholder="Current E-mail">
+          </div>
+        </div>
+      </div>
+    </li>
+   
+        <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="email"  id="newEmail" placeholder="Enter a new E-mail">
+          </div>
+        </div>
+      </div>
+    </li>
+      
+      
+         <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="password"  id="currentPass" placeholder="Enter your current password for confirmation">
+          </div>
+        </div>
+      </div>
+    </li> 
+  </ul>
+            
+<br><br>
+<div class="row">
+  <div class="col-50">
+    <button type="submit" class="button button-big button-green">Update</button>
+  </div>
+  <div class="col-50">
+    <button href="#" class="close-popup button button-big button-red">Close</button>
+  </div>
+</div>             
+            
+</form>
+       
+    </div>
+  </div>
+<!------------------end of popup------------------------------------>
+  
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    <!--------------------------  updating password----------------------->
+<div class="popup popup-about m2">
+    <div class="content-block"> 
+    <h1 style="text-align: center;">Updating Password</h1>    
+        <form id="f2" class="list-block store-data">
+  <ul>
+   
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="email"  id="currentEm" placeholder="Current E-mail">
+          </div>
+        </div>
+      </div>
+    </li>
+   
+      
+      
+         <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="password"  id="currentPa" placeholder="current password for confirmation">
+          </div>
+        </div>
+      </div>
+    </li> 
+      
+             <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="password"  id="newPW" placeholder="Your new password">
+          </div>
+        </div>
+      </div>
+    </li> 
+  </ul>
+            
+<br><br>
+<div class="row">
+  <div class="col-50">
+    <button type="submit" class="button button-big button-green">Update</button>
+  </div>
+  <div class="col-50">
+    <button href="#" class="close-popup button button-big button-red">Close</button>
+  </div>
+</div>             
+            
+</form>
+       
+    </div>
+  </div>
+<!------------------end of popup------------------------------------>
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-------------------------- delete account----------------------->
+<div class="popup popup-about m3">
+    <div class="content-block"> 
+    <h1 style="text-align: center;">Delete Account</h1>    
+        <form id="f3" class="list-block store-data">
+  <ul>
+   
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="email"  id="currentEm3" placeholder="Current E-mail">
+          </div>
+        </div>
+      </div>
+    </li>
+   
+      
+      
+         <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <!-- Make sure that input have "name attrobute" -->
+            <input type="password"  id="currentPa3" placeholder="current password for confirmation">
+          </div>
+        </div>
+      </div>
+    </li> 
+      
+    
+  </ul>
+            
+<br><br>
+<div class="row">
+  <div class="col-50">
+    <button type="submit" class="button button-big button-green">Delete</button>
+  </div>
+  <div class="col-50">
+    <button href="#" class="close-popup button button-big button-red">Close</button>
+  </div>
+</div>             
+            
+</form>
+       
+    </div>
+  </div>
+<!------------------end of popup------------------------------------>
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+    <!------(1) jQuery ------------>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    
+     <!-----------(2) firebase js -------------->
+     <script src="js/firebaseAuth.js"></script>    
+    <script src="js/main.js"></script>  
+    <!---------------------------------------->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+    
+    <script>
+    $('#updateBtn').on('click', function(){
+      myApp.popup('.m1');
+     
+          });
+      
+        
+          $('#updatePwBtn').on('click', function(){
+      myApp.popup('.m2');
+     
+          });
+        
+        
+        
+         $('#deleteBtn').on('click', function(){
+      myApp.popup('.m3');
+     
+          });
+        
+        
+        $('.pizza').on('click', function(){
+      myApp.popup('.m7');
+     
+          });
+        
+        
+        /*-------change the popup details according the the pizza ---*/
+      $('.p1').on('click', function(){
+      $('#p-name').html('Sicilian Pizza');
+      $('#p-details').html('A thick cut of pizza with pillowy dough, a crunchy crust, and robust tomato sauce. Served with or without cheese, and often with the cheese underneath the sauce.'); 
+         $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');  
+          });
+        
+          $('.p2').on('click', function(){
+      $('#p-name').html('Margherita');
+      $('#p-details').html('Features tomatoes, sliced mozzarella, basil, and extra virgin olive oil.');       
+         $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');      
+          });
+        
+        
+           $('.p3').on('click', function(){
+      $('#p-name').html('Greek');
+      $('#p-details').html('Made with tomato paste, cheese which is usually a mix of mozzarella and cheddar or provolone + feta cheese, black olives, and red onion.'); 
+     $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');           
+          });
+        
+        
+             $('.p4').on('click', function(){
+      $('#p-name').html('California');
+      $('#p-details').html('Your choice to use either thin or thick crust will determine how you will bake your pizza. You can include anything from chicken and artichokes to goat cheese and egg.');
+         $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');         
+          });
+        
+        
+              $('.p5').on('click', function(){
+      $('#p-name').html('St. Louis');
+      $('#p-details').html('Made with cheese and a sweeter tomato sauce with a hefty dosage of oregano. It can support several toppings of your choice.');
+        $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');      
+          });
+        
+        
+                $('.p6').on('click', function(){
+      $('#p-name').html('New Yourk');
+      $('#p-details').html('Made with pepperoni and sausage to mushroom and anchovies + oregano, red pepper flakes, Parmesan cheese, and garlic powder.');
+         $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');            
+          });
+        
+        
+              $('.p7').on('click', function(){
+      $('#p-name').html('BBQ Chicken');
+      $('#p-details').html('Made with bbq sauce, mozzarella, chicken, red onions and cilantro on perfect homemade pizza crust.'); 
+         $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');          
+          });
+        
+        
+             $('.p8').on('click', function(){
+      $('#p-name').html('Chicago');
+      $('#p-details').html('Made with slices of mozzarella lining the dough followed by meat, vegetables, and then topped with a can of crushed tomatoes.');
+        $('.content-block').css('overflow-y', 'hidden').css('height',' 100%');
+          });
+           
+    
+        
+       
+             $('.close-popup').on('click', function(){
+          $('.content-block').css('overflow-y', 'scroll').css('height',' 100%');
+          });
+    </script>
+</body>
+
+</html>
